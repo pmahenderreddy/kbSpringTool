@@ -5,22 +5,38 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
-	
+
 	// default logger: LogBack from slf4j
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping("/login")
-	public String gotoLoginPage(@RequestParam String name, ModelMap model) {
-		if (name == "") { // if name query parameter is empty, ?name=
-			name = "user";
-		}
-		model.put("name", name); // to make data available to view
-		logger.info("Pushed into model: query param name='{}'", name);
+	private AuthenticationService authSerive;
+		
+	public LoginController(AuthenticationService authSerive) {
+		super();
+		this.authSerive = authSerive;
+	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String gotoLoginPage() {
 		return "login"; // forward to login.jsp view
 	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String loginHandler(@RequestParam String username, 
+			@RequestParam String password, ModelMap model) {
+
+		model.put("name", username);
+		if( authSerive.authenticate(username, password)) {
+			return "welcome";
+		}
+		logger.info("Login authentication failed with {}/{}", username, password);
+		model.put("errorMessage", "Invalid credentials, please try again!");
+		return "login"; // forward to login.jsp view
+	}
+
 }
