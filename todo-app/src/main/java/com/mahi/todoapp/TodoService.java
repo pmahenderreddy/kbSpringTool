@@ -2,6 +2,7 @@ package com.mahi.todoapp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +19,20 @@ public class TodoService {
 	}
 
 	public List<Todo> findByUsername(String username) {
-		return todos;
+		if (username.equalsIgnoreCase("") || username == null) {
+			return todos;
+		}
+
+		// filtering from todos which meet the criteria
+		List<Todo> filteredTodos = new ArrayList<>();
+		for (Iterator iterator = todos.iterator(); iterator.hasNext();) {
+			Todo todo = (Todo) iterator.next();
+
+			if (todo.getUsername().equalsIgnoreCase(username)) {
+				filteredTodos.add(todo);
+			}
+		}
+		return filteredTodos;
 	}
 
 }

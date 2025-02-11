@@ -7,8 +7,9 @@
 </head>
 <body>
 	<h1>List Todos</h1>
-	
 	<div>
+		<h4>Filtering by: ${filter == "" ? "all" : filter}</h4>
+		<h4>Number of todos : ${todos.size()}</h4>
 		List of todos : <br>${todos}
 	</div>
 </body>

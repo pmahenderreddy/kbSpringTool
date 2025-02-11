@@ -3,6 +3,8 @@ package com.mahi.todoapp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TodoController {
@@ -14,11 +16,10 @@ public class TodoController {
 		this.todoService = todoService;
 	}
 
-	@RequestMapping("/list-todos")
-	public String listAllTodos(ModelMap model) {
-
-		model.put("todos", todoService.findByUsername(""));
+	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
+	public String filterTodos(@RequestParam(value = "filter", defaultValue = "") String filter, ModelMap model) {
+		model.put("filter", filter);
+		model.put("todos", todoService.findByUsername(filter));
 		return "listTodos";
 	}
-
 }
