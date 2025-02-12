@@ -7,15 +7,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("name")
 public class LoginController {
 
 	// default logger: LogBack from slf4j
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private AuthenticationService authSerive;
-		
+
 	public LoginController(AuthenticationService authSerive) {
 		super();
 		this.authSerive = authSerive;
@@ -27,11 +29,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginHandler(@RequestParam String username, 
-			@RequestParam String password, ModelMap model) {
+	public String loginHandler(@RequestParam String username, @RequestParam String password, ModelMap model) {
 
 		model.put("name", username);
-		if( authSerive.authenticate(username, password)) {
+		if (authSerive.authenticate(username, password)) {
 			return "welcome";
 		}
 		logger.info("Login authentication failed with {}/{}", username, password);

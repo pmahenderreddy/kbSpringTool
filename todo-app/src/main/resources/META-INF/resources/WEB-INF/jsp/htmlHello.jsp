@@ -7,6 +7,7 @@
 </head>
 <body>
 	<h1>Html Hello from JSP!!!</h1>
+	<h1>Welcome ${name}!</h1>
 	<%
 		System.out.println("Testing ... old stuff within JSP");
 	%>

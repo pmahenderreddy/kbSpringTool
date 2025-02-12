@@ -7,10 +7,11 @@
 	<title>List Todos</title>
 </head>
 <body>
+	<h1>Welcome "${name}"</h1>
 	<h1>Your todos</h1>
 	<div>
 		<div>
-			<span>Filtering by: ${filter == "" ? "all" : filter}</span>
+			<span>Filtering by: ${filter == "" || filter == null ? "all" : filter}</span>
 			<span> |..| </span>
 			<span>Number of todos : ${todos.size()}</span>
 		</div>
@@ -30,6 +31,6 @@
 		    <span>${item.done}</span>
 		    </div>
 		</c:forEach>		
-	</div>
+	</div>	
 </body>
 </html>
