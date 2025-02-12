@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,11 +7,29 @@
 	<title>List Todos</title>
 </head>
 <body>
-	<h1>List Todos</h1>
+	<h1>Your todos</h1>
 	<div>
-		<h4>Filtering by: ${filter == "" ? "all" : filter}</h4>
-		<h4>Number of todos : ${todos.size()}</h4>
-		List of todos : <br>${todos}
+		<div>
+			<span>Filtering by: ${filter == "" ? "all" : filter}</span>
+			<span> |..| </span>
+			<span>Number of todos : ${todos.size()}</span>
+		</div>
+		<hr>
+		<style>
+			div.myrow > span{
+				width: 100px;
+				display: inline-block;
+			}
+		</style>
+		<c:forEach var="item" items="${todos}">
+			<div class="myrow">
+		    <span>${item.id}</span>
+		    <span>${item.username}</span>
+		    <span>${item.description}</span>
+		    <span>${item.targetDate}</span>
+		    <span>${item.done}</span>
+		    </div>
+		</c:forEach>		
 	</div>
 </body>
 </html>
