@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login page - this is view from MVC</title>
+</head>
+<body>
+	<h1>All courses via Thymeleaf</h1>
+	<ol>
+	<li th:each="item : ${courses}">
+	    <span style="width: 150px;display: inline-block;" th:text="${item.name}"></span> | 
+	    <span style="width: 150px;display: inline-block;" th:text="${item.author}"></span> | 
+	    Course#
+		<span style="width: 150px;display: inline-block;" th:text="${item.id}"></span>
+	</li>
+	</ol>
+
+</body>
+</html>

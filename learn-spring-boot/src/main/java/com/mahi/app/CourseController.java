@@ -30,14 +30,11 @@ public class CourseController {
 		String pageId = (id == null) ? "Welcome-Page" : id;
 		return "<h1>Course Page: " + pageId + "</h1>";
 	}
-	
+
 	@GetMapping("/course/all")
 	public List<Course> courses() {
-		return Arrays.asList(
-				new Course("1", "Learn Java", "Srisailam K"),
-				new Course("2", "Learn Spring", "Rajkumar P"),
-				new Course("3", "Learn Security", "Pavan S")
-				);
+		return Arrays.asList(new Course("1", "Learn Java", "Srisailam K"),
+				new Course("2", "Learn Spring", "Rajkumar P"), new Course("3", "Learn Security", "Pavan S"));
 	}
 
 }
