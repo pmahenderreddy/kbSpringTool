@@ -10,31 +10,42 @@
 
 </head>
 <body>
-	<h1>Welcome "${name}"</h1>
-	<h1>Your todos</h1>
-	<div>
+	<div class="container">
+		<h1>Welcome "${name}"</h1>
+		<h1>Your todos</h1>
 		<div>
-			<span>Filtering by: ${filter == "" || filter == null ? "all" : filter}</span>
-			<span> |..| </span>
-			<span>Number of todos : ${todos.size()}</span>
+			<div>
+				<span>Filtering by: ${filter == "" || filter == null ? "all" : filter}</span>
+				<span> |..| </span>
+				<span>Number of todos : ${todos.size()}</span>
+			</div>
+			<hr>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Descripiton</th>
+						<th>Target Date</th>
+						<th>IsDone</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<c:forEach var="item" items="${todos}">
+					<tr>
+						<td>${item.id}</td>
+						<td>${item.username}</td>
+						<td>${item.description}</td>
+						<td>${item.targetDate}</td>
+						<td>${item.done}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>		
 		</div>
-		<hr>
-		<style>
-			div.myrow > span{
-				width: 100px;
-				display: inline-block;
-			}
-		</style>
-		<c:forEach var="item" items="${todos}">
-			<div class="myrow">
-		    <span>${item.id}</span>
-		    <span>${item.username}</span>
-		    <span>${item.description}</span>
-		    <span>${item.targetDate}</span>
-		    <span>${item.done}</span>
-		    </div>
-		</c:forEach>		
-	</div>	
+	</div>
 	
 	<script src="/webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 	<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
