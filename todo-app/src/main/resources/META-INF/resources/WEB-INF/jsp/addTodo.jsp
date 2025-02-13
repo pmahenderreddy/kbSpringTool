@@ -16,7 +16,7 @@
 				<div class="mt-2 p-1">
 					<label>Description</label>
 					<form:input class="mt-2 p-1" style="width:100%" path="description" type="text" 
-						value="" placeholder="Please enter description" required="required" />
+						placeholder="Please enter description" required="required" />
 					<form:errors path="description" cssClass="text-warning" />
 				</div>
 				<div class="mt-2 p-1">

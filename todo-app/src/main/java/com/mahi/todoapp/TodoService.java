@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
@@ -44,5 +45,12 @@ public class TodoService {
 	public void deleteTodoById(int id) {
 		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
 		todos.removeIf(predicate);
+	}
+
+	public Todo findTodoById(int id) {
+		//return todos.stream().filter(todo -> todo.getId() == id).findFirst().get();
+		
+		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+		return (Todo)todos.stream().filter(predicate).findFirst().get();		
 	}
 }
