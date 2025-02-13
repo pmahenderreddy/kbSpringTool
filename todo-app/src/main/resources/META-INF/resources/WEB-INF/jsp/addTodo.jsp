@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +12,21 @@
 	<div class="container mx-auto" style="width: 400px;">
 		<h1>Add Todo</h1>
 		<div>
-			<form method="POST">
+			<form:form method="POST" modelAttribute="todo">
 				<div class="mt-2 p-1">
 					<label>Description</label>
-					<input class="mt-2 p-1" style="width:100%" name="description" type="text" value="" placeholder="Please enter description" required="required" />
+					<form:input class="mt-2 p-1" style="width:100%" path="description" type="text" 
+						value="" placeholder="Please enter description" required="required" />
+					<form:errors path="description" cssClass="text-warning" />
 				</div>
 				<div class="mt-2 p-1">
+					<!--<form:input path="targetDate" type="hidden" value="${todo.targetDate}" />-->
+					<form:input path="done" type="hidden" value="${todo.done}" />
+					<form:input path="id" type="hidden" value="${todo.id}" />
+					
 					<input  style="width: 100%;" value="Add Todo" type="submit" class="btn btn-primary" />
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </body>

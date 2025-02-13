@@ -26,7 +26,7 @@ public class TodoService {
 
 		// filtering from todos which meet the criteria
 		List<Todo> filteredTodos = new ArrayList<>();
-		for (Iterator iterator = todos.iterator(); iterator.hasNext();) {
+		for (Iterator<Todo> iterator = todos.iterator(); iterator.hasNext();) {
 			Todo todo = (Todo) iterator.next();
 
 			if (todo.getUsername().equalsIgnoreCase(username)) {
