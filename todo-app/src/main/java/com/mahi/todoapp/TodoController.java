@@ -39,6 +39,15 @@ public class TodoController {
 		todoService.addTodo((String)model.get("name"), todo.getDescription(), LocalDate.now().plusWeeks(3), false);
 		return "redirect:list-todos";
 	}
+	
+	@RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
+	public String deleteTodo(@RequestParam int id) {
+		todoService.deleteTodoById(id);
+		return "redirect:list-todos";
+	}
+	
+	
+	
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
 	public String filterTodos(@RequestParam(value = "filter", defaultValue = "") String filterBy, ModelMap model) {
