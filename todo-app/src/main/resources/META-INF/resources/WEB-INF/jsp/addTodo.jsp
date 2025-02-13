@@ -5,12 +5,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Add Todo</title>
+	<title>Add/Edit Todo</title>
 	<link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container mx-auto" style="width: 400px;">
-		<h1>Add Todo</h1>
+		<h1>Add/Edit Todo</h1>
 		<div>
 			<form:form method="POST" modelAttribute="todo">
 				<div class="mt-2 p-1">
@@ -20,7 +20,7 @@
 					<form:errors path="description" cssClass="text-warning" />
 				</div>
 				<div class="mt-2 p-1">
-					<!--<form:input path="targetDate" type="hidden" value="${todo.targetDate}" />-->
+					<form:input path="targetDate" type="hidden" value="${todo.targetDate}" />
 					<form:input path="done" type="hidden" value="${todo.done}" />
 					<form:input path="id" type="hidden" value="${todo.id}" />
 					
