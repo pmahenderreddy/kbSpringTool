@@ -1,5 +1,7 @@
 package com.mahi.todoapp;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,18 @@ public class TodoController {
 	public TodoController(TodoService todoService) {
 		super();
 		this.todoService = todoService;
+	}
+	
+	
+	@RequestMapping(value = "/add-todo", method = RequestMethod.GET)
+	public String addTodo() {
+		return "addTodo";
+	}
+	
+	@RequestMapping(value = "/add-todo", method = RequestMethod.POST)
+	public String saveAddTodo(@RequestParam(value = "description", defaultValue = "") String description, ModelMap model) {
+		todoService.addTodo((String)model.get("name"), description, LocalDate.now().plusWeeks(3), false);
+		return "redirect:list-todos";
 	}
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)

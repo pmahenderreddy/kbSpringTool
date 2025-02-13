@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class TodoService {
 	private static List<Todo> todos = new ArrayList<>();
+	private static int todoIdGen = 1;
 
 	static {
-		todos.add(new Todo(1, "Ramakrishna", "Learn AOSP", LocalDate.now().plusMonths(3), false));
-		todos.add(new Todo(2, "Rajkumar", "Learn Springboot", LocalDate.now().plusMonths(1), false));
-		todos.add(new Todo(3, "Mahender", "Learn Springboot 3", LocalDate.now().plusMonths(6), false));
-		todos.add(new Todo(4, "Harsha", "Learn Git/GitHub", LocalDate.now().plusWeeks(1), false));
+		todos.add(new Todo(todoIdGen++, "Ramakrishna", "Learn AOSP", LocalDate.now().plusMonths(3), false));
+		todos.add(new Todo(todoIdGen++, "Rajkumar", "Learn Springboot", LocalDate.now().plusMonths(1), false));
+		todos.add(new Todo(todoIdGen++, "Mahender", "Learn Springboot 3", LocalDate.now().plusMonths(6), false));
+		todos.add(new Todo(todoIdGen++, "Harsha", "Learn Git/GitHub", LocalDate.now().plusWeeks(1), false));
 	}
 
 	public List<Todo> findByUsername(String username) {
@@ -33,5 +34,9 @@ public class TodoService {
 			}
 		}
 		return filteredTodos;
+	}
+
+	public void addTodo(String username, String description, LocalDate targetDate, boolean isDone) {
+		todos.add(new Todo(todoIdGen++, username, description, targetDate, isDone));
 	}
 }
