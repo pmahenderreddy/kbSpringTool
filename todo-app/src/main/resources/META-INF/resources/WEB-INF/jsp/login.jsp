@@ -4,27 +4,33 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login page - this is view from MVC</title>
+	
+	<link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<!-- ${name} pulls data from model, 
-		which is populated in controller in this example  -->
-	<h1>Welcome to the login page</h1>
-	
-	<div>
-		<pre>${errorMessage}</pre>
-		<form method="POST">
-			<div>
-				<label>Username</label>
-				<input name="username" type="text" value="${name}" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input name="password" type="password" />
-			</div>
-			<div>
-				<input type="submit" />
-			</div>
-		</form>
+	<div class="container">
+		<!-- ${name} pulls data from model, 
+			which is populated in controller in this example  -->
+		
+		
+		<div class="mx-auto" style="width: 400px;">
+			<h1>Login Page</h1>
+			<pre>${errorMessage}</pre>
+			<form method="POST">
+				<div class="mt-1 p-1">
+					<label style="width: 25%;">Username</label>
+					<input name="username" type="text" value="${name}" />
+				</div>
+				
+				<div class="mt-1 p-1">
+					<label style="width: 25%;">Password</label>
+					<input name="password" type="password" />
+				</div>
+				<div class="mt-1 p-1">
+					<input  style="width: 75%;" type="submit" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
