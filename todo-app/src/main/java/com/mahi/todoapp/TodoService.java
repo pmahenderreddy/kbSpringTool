@@ -57,7 +57,10 @@ public class TodoService {
 	}
 
 	public void updateTodo(@Valid Todo todo) {
-		deleteTodoById(todo.getId());
-		todos.add(todo);
+		Todo currentTodo = findTodoById(todo.getId());
+		currentTodo.setDescription(todo.getDescription());
+		currentTodo.setUsername(todo.getUsername());
+		currentTodo.setTargetDate(todo.getTargetDate());
+		currentTodo.setDone(todo.getDone());
 	}
 }
