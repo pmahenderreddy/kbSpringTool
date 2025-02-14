@@ -28,16 +28,16 @@ public class LoginController {
 		return "login"; // forward to login.jsp view
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
 	public String loginHandler(@RequestParam String username, @RequestParam String password, ModelMap model) {
 
-		model.put("name", username);
 		if (authSerive.authenticate(username, password)) {
+			model.put("name", username);
 			return "welcome";
 		}
 		logger.info("Login authentication failed with {}/{}", username, password);
 		model.put("errorMessage", "Invalid credentials, please try again!");
-		return "login"; // forward to login.jsp view
+		return "redirect:login"; // forward to login.jsp view
 	}
 
 }

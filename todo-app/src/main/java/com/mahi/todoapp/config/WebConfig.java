@@ -15,8 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(myCustomInterceptor).addPathPatterns("/**"); // Intercept all requests
-//		registry.addInterceptor(myCustomInterceptor).addPathPatterns("/delete*"); // Intercept all delete requests
+//		registry.addInterceptor(myCustomInterceptor).addPathPatterns("/**"); // Intercept all requests
 	}
 
 //	@Override

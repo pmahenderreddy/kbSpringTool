@@ -16,7 +16,7 @@
 		<div class="mx-auto mt-3 p-3 text-center" style="width: 400px; border: 3px dotted #CCC">
 			<h1 class="text-center">Login Page</h1>
 			<pre>${errorMessage}</pre>
-			<form method="POST">
+			<form method="POST" action="/welcome">
 				<div class="mt-1 p-1">
 					<label style="width: 25%;">Username</label>
 					<input name="username" type="text" value="${name}" />

@@ -19,7 +19,7 @@ public class MyCustomInterceptor implements HandlerInterceptor {
 
 		boolean goAhead = true;
 		String requestURI = request.getRequestURI();
-		if (requestURI.endsWith(".css") || requestURI.endsWith(".js")) {
+		if (requestURI.endsWith(".css") || requestURI.endsWith(".js") || requestURI.startsWith("/welcome")) {
 			return goAhead;
 		}
 
