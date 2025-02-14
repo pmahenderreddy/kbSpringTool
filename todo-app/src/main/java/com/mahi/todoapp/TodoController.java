@@ -22,50 +22,45 @@ public class TodoController {
 		super();
 		this.todoService = todoService;
 	}
-	
-	
+
 	@RequestMapping(value = "add-todo", method = RequestMethod.GET)
 	public String addTodo(ModelMap model) {
-		Todo todo = new Todo(0, (String)model.get("name"), "", LocalDate.now().plusWeeks(3), false);
+		Todo todo = new Todo(0, (String) model.get("name"), "", LocalDate.now().plusWeeks(3), false);
 		model.put("todo", todo);
 		return "addTodo";
 	}
-	
+
 	@RequestMapping(value = "add-todo", method = RequestMethod.POST)
 	public String saveAddTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-		if( result.hasErrors() ) {
+		if (result.hasErrors()) {
 			return "addTodo";
 		}
-		todoService.addTodo((String)model.get("name"), todo.getDescription(), LocalDate.now().plusWeeks(3), false);
+		todoService.addTodo((String) model.get("name"), todo.getDescription(), todo.getTargetDate(), false);
 		return "redirect:list-todos";
 	}
-	
-	
-	@RequestMapping(value="update-todo", method = RequestMethod.GET)
+
+	@RequestMapping(value = "update-todo", method = RequestMethod.GET)
 	public String editTodo(@RequestParam int id, ModelMap model) {
 		Todo todo = todoService.findTodoById(id);
 		model.addAttribute("todo", todo);
 		return "addTodo"; // go to required jsp to edit/update the todo
 	}
-	
+
 	@RequestMapping(value = "update-todo", method = RequestMethod.POST)
 	public String saveEditTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-		if( result.hasErrors() ) {
+		if (result.hasErrors()) {
 			return "addTodo";
 		}
-		todo.setUsername((String)model.get("name"));
+		todo.setUsername((String) model.get("name"));
 		todoService.updateTodo(todo);
 		return "redirect:list-todos";
 	}
-	
+
 	@RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
 	public String deleteTodo(@RequestParam int id) {
 		todoService.deleteTodoById(id);
 		return "redirect:list-todos";
 	}
-	
-	
-	
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
 	public String filterTodos(@RequestParam(value = "filter", defaultValue = "") String filterBy, ModelMap model) {

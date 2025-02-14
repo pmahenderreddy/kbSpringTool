@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class TodoService {
 		// filtering from todos which meet the criteria
 		List<Todo> filteredTodos = new ArrayList<>();
 		for (Iterator<Todo> iterator = todos.iterator(); iterator.hasNext();) {
-			Todo todo = (Todo) iterator.next();
+			Todo todo = iterator.next();
 
 			if (todo.getUsername().equalsIgnoreCase(username)) {
 				filteredTodos.add(todo);
@@ -50,10 +49,10 @@ public class TodoService {
 	}
 
 	public Todo findTodoById(int id) {
-		//return todos.stream().filter(todo -> todo.getId() == id).findFirst().get();
-		
+		// return todos.stream().filter(todo -> todo.getId() == id).findFirst().get();
+
 		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
-		return (Todo)todos.stream().filter(predicate).findFirst().get();		
+		return todos.stream().filter(predicate).findFirst().get();
 	}
 
 	public void updateTodo(@Valid Todo todo) {

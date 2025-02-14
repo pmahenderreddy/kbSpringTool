@@ -47,6 +47,9 @@
 						</td>
 					</tr>
 					</c:forEach>
+					<c:if test="${todos.size() == 0}">
+						<tr><td colspan="6" class="text-center">No todos</td></tr>
+					</c:if>
 				</tbody>
 			</table>
 			
