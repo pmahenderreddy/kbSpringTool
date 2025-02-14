@@ -13,8 +13,8 @@
 			which is populated in controller in this example  -->
 		
 		
-		<div class="mx-auto" style="width: 400px;">
-			<h1>Login Page</h1>
+		<div class="mx-auto mt-3 p-3 text-center" style="width: 400px; border: 3px dotted #CCC">
+			<h1 class="text-center">Login Page</h1>
 			<pre>${errorMessage}</pre>
 			<form method="POST">
 				<div class="mt-1 p-1">
@@ -26,8 +26,8 @@
 					<label style="width: 25%;">Password</label>
 					<input name="password" type="password" />
 				</div>
-				<div class="mt-1 p-1">
-					<input  style="width: 75%;" type="submit" class="btn btn-primary" />
+				<div class="mt-3 p-1 mb-3">
+					<input  style="width: 80%;" type="submit" class="btn btn-primary" />
 				</div>
 			</form>
 		</div>
