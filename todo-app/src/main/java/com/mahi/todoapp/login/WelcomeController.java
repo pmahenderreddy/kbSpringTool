@@ -15,7 +15,7 @@ public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String gotoWelcomePage(ModelMap model) {
-		model.put("name", "Mahender");
+		//model.put("name", "Mahender");
 		return "welcome";
 	}
 
