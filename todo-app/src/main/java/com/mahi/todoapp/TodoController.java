@@ -63,9 +63,9 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
-	public String filterTodos(@RequestParam(value = "filter", defaultValue = "") String filterBy, ModelMap model) {
-		model.put("filter", filterBy);
-		model.put("todos", todoService.findByUsername(filterBy));
+	public String listAllTodos(ModelMap model) {
+		String username = (String) model.getAttribute("name");
+		model.put("todos", todoService.findByUsername(username));
 		return "listTodos";
 	}
 
