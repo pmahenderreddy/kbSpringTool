@@ -2,14 +2,30 @@ package com.mahi.todoapp;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+// a custom table name can be given as follow, otherwise class name is the table name
+@Entity(name = "Todo")
 public class Todo {
 	// Todo Bean
+
+	// @Id implies it is primary key
+	@Id
+	// @GeneratedValue Provides for the specification of generation strategies for
+	// the values of primary keys.
+	@GeneratedValue
 	private int id;
+
+	// a custom column name can be given as follow, otherwise field/property name is
+	// used
+	@Column(name = "name")
 	private String username;
-	
-	@Size(min=10, message="Enter atleast 10 characters")
+
+	@Size(min = 10, message = "Enter atleast 10 characters")
 	private String description;
 	private LocalDate targetDate;
 	private boolean done;
