@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
@@ -17,8 +18,13 @@ public class Todo {
 	@Id
 	// @GeneratedValue Provides for the specification of generation strategies for
 	// the values of primary keys.
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	public Todo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	// a custom column name can be given as follow, otherwise field/property name is
 	// used

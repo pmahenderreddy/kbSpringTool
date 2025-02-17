@@ -16,17 +16,19 @@ import jakarta.validation.Valid;
 @SessionAttributes({ "name", "filter" })
 public class TodoController {
 
-	private TodoService todoService;
+	private TodoRepository todoRepository;
 
-	public TodoController(TodoService todoService) {
+	public TodoController(TodoRepository todoRepository) {
 		super();
-		this.todoService = todoService;
+		this.todoRepository = todoRepository;
 	}
 
 	@RequestMapping(value = "add-todo", method = RequestMethod.GET)
 	public String addTodo(ModelMap model) {
-		Todo todo = new Todo(0, (String) model.get("name"), "", LocalDate.now().plusWeeks(3), false);
+		String username = (String) model.get("name");
+		Todo todo = new Todo(0, username, "", LocalDate.now().plusWeeks(3), false);
 		model.put("todo", todo);
+
 		return "addTodo";
 	}
 
@@ -35,14 +37,18 @@ public class TodoController {
 		if (result.hasErrors()) {
 			return "addTodo";
 		}
-		todoService.addTodo((String) model.get("name"), todo.getDescription(), todo.getTargetDate(), false);
+		String username = (String) model.get("name");
+		todo.setUsername(username);
+		todoRepository.save(todo);
+
 		return "redirect:list-todos";
 	}
 
 	@RequestMapping(value = "update-todo", method = RequestMethod.GET)
 	public String editTodo(@RequestParam int id, ModelMap model) {
-		Todo todo = todoService.findTodoById(id);
+		Todo todo = todoRepository.findById(id).get();
 		model.addAttribute("todo", todo);
+
 		return "addTodo"; // go to required jsp to edit/update the todo
 	}
 
@@ -51,38 +57,25 @@ public class TodoController {
 		if (result.hasErrors()) {
 			return "addTodo";
 		}
-		todo.setUsername((String) model.get("name"));
-		todoService.updateTodo(todo);
+		String username = (String) model.get("name");
+		todo.setUsername(username);
+		todoRepository.save(todo);
+
 		return "redirect:list-todos";
 	}
 
 	@RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
 	public String deleteTodo(@RequestParam int id) {
-		todoService.deleteTodoById(id);
+		todoRepository.deleteById(id);
+
 		return "redirect:list-todos";
 	}
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
 	public String listAllTodos(ModelMap model) {
 		String username = (String) model.getAttribute("name");
-		model.put("todos", todoService.findByUsername(username));
-		return "listTodos";
-	}
+		model.put("todos", todoRepository.findByUsername(username));
 
-	@RequestMapping(value = "/list-todos-filterby", method = RequestMethod.GET)
-	public String filterTodos(ModelMap model, @RequestParam(value = "filter", defaultValue = "") String filterBy) {
-		model.put("filter", filterBy);
-		model.put("todos", todoService.findByUsername(filterBy));
-		return "listTodos";
-	}
-
-	@RequestMapping(value = "/list-todos-filter", method = RequestMethod.GET)
-	public String filterTodosList(ModelMap model) {
-		String filterBy = (String) model.get("filter");
-		if (filterBy == null) {
-			filterBy = "";
-		}
-		model.put("todos", todoService.findByUsername(filterBy));
 		return "listTodos";
 	}
 }
