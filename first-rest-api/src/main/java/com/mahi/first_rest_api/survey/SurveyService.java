@@ -25,7 +25,7 @@ public class SurveyService {
 		Survey survey = new Survey("Survey1", "1 My Favorite Survey", "1 Description of the Survey", questions);
 
 		surveys.add(survey);
-		
+
 		question1 = new Question("Question1", "2 Most Popular Cloud Platform Today",
 				Arrays.asList("AWS", "Azure", "Google Cloud", "Oracle Cloud"), "AWS");
 		question2 = new Question("Question2", "2 Fastest Growing Cloud Platform",
@@ -44,10 +44,31 @@ public class SurveyService {
 		return surveys;
 	}
 
-	public Optional<Survey> retrieveSurveyById(String surveyId) {
+	public Survey retrieveSurveyById(String surveyId) {
 		Predicate<? super Survey> predicate = survey -> survey.getId().equalsIgnoreCase(surveyId);
-		return surveys.stream().filter(predicate).findFirst();
+		Optional<Survey> survey = surveys.stream().filter(predicate).findFirst();
+
+		return survey.orElse(null);
 	}
 
+	public List<Question> retrieveAllSurveyQuestions(String surveyId) {
+		Survey survey = retrieveSurveyById(surveyId);
+		if (survey == null) {
+			return null;
+		}
+		return survey.getQuestions();
+	}
 
+	public Question retrieveSpecificSurveyQuestion(String surveyId, String questionId) {
+		List<Question> surveyQuestions = retrieveAllSurveyQuestions(surveyId);
+
+		if (surveyQuestions == null) {
+			return null;
+		}
+
+		Predicate<? super Question> predicate = q -> q.getId().equalsIgnoreCase(questionId);
+		Optional<Question> question = surveyQuestions.stream().filter(predicate).findFirst();
+
+		return question.orElse(null);
+	}
 }
