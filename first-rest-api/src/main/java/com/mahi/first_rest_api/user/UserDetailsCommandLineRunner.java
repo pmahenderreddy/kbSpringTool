@@ -13,9 +13,9 @@ public class UserDetailsCommandLineRunner implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	private UserDetailsRepository repository;
+	private UserDetailsRestRepository repository;
 
-	public UserDetailsCommandLineRunner(UserDetailsRepository repository) {
+	public UserDetailsCommandLineRunner(UserDetailsRestRepository repository) {
 		super();
 		this.repository = repository;
 	}
