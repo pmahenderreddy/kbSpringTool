@@ -1,5 +1,7 @@
 package com.mahi.first_rest_api.survey;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,5 +77,22 @@ public class SurveyService {
 												.filter(generateQuestionByIdPredicate(questionId))
 												.findFirst();
 		return question.orElse(null);
+	}
+
+	public String addQuestionToSurvey(String surveyId, Question question) {
+		Survey survey = retrieveSurveyById(surveyId);
+		if (survey == null) {
+			return null;
+		}
+		question.setId(generateRandomId());
+		survey.getQuestions().add(question);
+		
+		return question.getId();		
+	}
+
+	private String generateRandomId() {
+		SecureRandom secureRandom = new SecureRandom();
+		String randomId = new BigInteger(32, secureRandom).toString();
+		return randomId;
 	}
 }
