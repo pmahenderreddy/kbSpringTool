@@ -50,6 +50,12 @@ public class SurveyService {
 		return question -> question.getId().equalsIgnoreCase(questionId);
 	}
 
+	private String generateRandomId() {
+		SecureRandom secureRandom = new SecureRandom();
+		String randomId = new BigInteger(32, secureRandom).toString();
+		return randomId;
+	}
+	
 	public List<Survey> retrieveAllSurveys() {
 		return surveys;
 	}
@@ -90,9 +96,36 @@ public class SurveyService {
 		return question.getId();		
 	}
 
-	private String generateRandomId() {
-		SecureRandom secureRandom = new SecureRandom();
-		String randomId = new BigInteger(32, secureRandom).toString();
-		return randomId;
+
+	public boolean deleteSurveyQuestion(String surveyId, String questionId) {
+		List<Question> surveyQuestions = retrieveSurveyQuestions(surveyId);
+		if (surveyQuestions == null) {
+			return false;
+		}
+
+		boolean isDeleted = surveyQuestions.removeIf(generateQuestionByIdPredicate(questionId));
+		return isDeleted;
+	}
+
+	public boolean updateSurveyQuestion(String surveyId, String questionId, Question newQuestion) {
+		List<Question> surveyQuestions = retrieveSurveyQuestions(surveyId);
+		if (surveyQuestions == null) {
+			return false; // not updated
+		}
+
+		Optional<Question> optionalOldQuestion = surveyQuestions.stream()
+				.filter(generateQuestionByIdPredicate(questionId))
+				.findFirst();
+		if( optionalOldQuestion.isEmpty()) {
+			return false; // not updated
+		}
+		
+		Question question = optionalOldQuestion.get();
+		question.setId(newQuestion.getId());
+		question.setQuestion(newQuestion.getQuestion());
+		question.setOptions(newQuestion.getOptions());
+		question.setCorrectAnswer(newQuestion.getCorrectAnswer());
+		
+		return true;// updated
 	}
 }

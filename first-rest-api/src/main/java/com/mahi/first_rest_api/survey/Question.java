@@ -24,10 +24,6 @@ public class Question {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getQuestion() {
 		return question;
 	}
@@ -38,6 +34,22 @@ public class Question {
 
 	public String getCorrectAnswer() {
 		return correctAnswer;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public void setOptions(List<String> options) {
+		this.options = options;
+	}
+
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 
 	@Override

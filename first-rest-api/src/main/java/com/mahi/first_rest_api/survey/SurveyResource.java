@@ -2,7 +2,6 @@ package com.mahi.first_rest_api.survey;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,12 +59,33 @@ public class SurveyResource {
 	}
 
 	@RequestMapping("/surveys/{surveyId}/questions/{questionId}")
-	public Question retrieveSurveyQuestions(@PathVariable String surveyId, @PathVariable String questionId) {
+	public Question retrieveSpecificSurveyQuestion(@PathVariable String surveyId, 
+			@PathVariable String questionId) {
 		Question question = surveyService.retrieveSpecificSurveyQuestion(surveyId, questionId);
 		if (question == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		return question;
 	}
-
+	
+	@RequestMapping(value="/surveys/{surveyId}/questions/{questionId}", method=RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteSpecificSurveyQuestion(@PathVariable String surveyId, 
+			@PathVariable String questionId) {
+		boolean isDeleted = surveyService.deleteSurveyQuestion(surveyId, questionId);
+		if (!isDeleted) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/surveys/{surveyId}/questions/{questionId}", method=RequestMethod.PUT)
+	public ResponseEntity<Object> updateSpecificSurveyQuestion(@PathVariable String surveyId, 
+			@PathVariable String questionId, 	
+			@RequestBody Question question) {
+		boolean isUpdated = surveyService.updateSurveyQuestion(surveyId, questionId, question);
+		if (!isUpdated) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		return ResponseEntity.noContent().build();
+	}
 }
