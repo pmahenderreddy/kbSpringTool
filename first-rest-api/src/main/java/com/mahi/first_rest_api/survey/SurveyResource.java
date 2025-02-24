@@ -33,24 +33,21 @@ public class SurveyResource {
 	}
 
 	@RequestMapping("/surveys/{surveyId}/questions")
-	public List<Question> retrieveAllSurveyQuestions(@PathVariable String surveyId) {
-		List<Question> questions = surveyService.retrieveAllSurveyQuestions(surveyId);
+	public List<Question> retrieveSurveyQuestions(@PathVariable String surveyId) {
+		List<Question> questions = surveyService.retrieveSurveyQuestions(surveyId);
 		if (questions == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		return questions;
-
-		// below single line code will work in all cases
-		// (only assumption is survey will have questions)
-		// return this.retrieveSurveyById(surveyId).getQuestions();
 	}
 
 	@RequestMapping("/surveys/{surveyId}/questions/{questionId}")
-	public Question retrieveSpecificSurveyQuestion(@PathVariable String surveyId, @PathVariable String questionId) {
+	public Question retrieveSurveyQuestions(@PathVariable String surveyId, @PathVariable String questionId) {
 		Question question = surveyService.retrieveSpecificSurveyQuestion(surveyId, questionId);
 		if (question == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 		return question;
 	}
+
 }
