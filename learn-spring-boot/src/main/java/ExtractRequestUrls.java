@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ExtractRequestUrls {
 	public static void main(String[] args) throws IOException {
-		String jsonString = Files.readString(Paths.get("D:\\KB\\regex-all.har"));
+		String jsonString = Files.readString(Paths.get("D:\\KB\\Other_pending\\Spring Security Core Beginner to Guru 2020\\Spring Security Core Beginner to Guru 2020.har"));
 
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();

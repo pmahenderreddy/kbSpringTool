@@ -31,6 +31,8 @@ public class FileSplliterByLines {
 					outFile.write(inFile.nextLine().getBytes());
 				}
 			}
+			outFile.write(nlBytes);
+			outFile.write("exit".getBytes());
 			outFile.close();
 		}
 		File newFile = new File(sourceFile.getParent() + "/runAll.bat");
