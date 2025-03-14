@@ -7,13 +7,13 @@ import jakarta.persistence.Id;
 
 @Entity
 public class UserDetails {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String role;
-	
+
 	public UserDetails() {
 		super();
 	}
