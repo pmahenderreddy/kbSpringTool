@@ -7,7 +7,7 @@ public class FileSplliterByLines {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		FileSplliterByLines.splitFileByLines(
-				"D:\\myGitHub\\learn-spring-boot\\src\\main\\resources\\split-staging\\download.bat", 10);
+				"d:\\myGitHub\\kbSpringTool\\learn-spring-boot\\src\\main\\resources\\split-staging\\download.bat", 5);
 	}
 
 	public static void splitFileByLines(String sourceFilePath, int nrLines) throws Exception {
