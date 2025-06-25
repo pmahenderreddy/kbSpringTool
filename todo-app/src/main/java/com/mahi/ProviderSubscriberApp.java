@@ -50,7 +50,7 @@ class Subscriber implements ProviderSubInterface {
 }
 
 class Provider {
-	List<Subscriber> users = new ArrayList<Subscriber>();
+	List<ProviderSubInterface> users = new ArrayList<ProviderSubInterface>();
 	
 	public boolean registerSubscriber(Subscriber sub) {
 		users.add(sub);
@@ -59,12 +59,12 @@ class Provider {
 	
 	public void broadcastMsgToSubscriber(int data) {
 		for( int i = 0; i < this.getSubscribers().size(); i++ ) {
-			Subscriber subscriber = this.getSubscribers().get( i );
+			ProviderSubInterface subscriber = this.getSubscribers().get( i );
 			subscriber.notifySubscriber( data );
 		}
 	}
 	
-	public List<Subscriber> getSubscribers() {
+	public List<ProviderSubInterface> getSubscribers() {
 		return users;
 	}
 }
